@@ -1,0 +1,1 @@
+window.WEEK_UP_NUMBER = 1

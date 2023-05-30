@@ -1,0 +1,546 @@
+@charset "UTF-8";
+
+@font-face {
+    font-display: swap;
+    font-weight: 300;
+    font-family: 'Roboto';
+    font-style: normal;
+    src: url(../fonts/Roboto-light.woff2) format("woff2")
+}
+
+@font-face {
+    font-display: swap;
+    font-weight: 400;
+    font-family: 'Roboto';
+    font-style: normal;
+    src: url(../fonts/Roboto-Regular.woff2) format("woff2")
+}
+
+@font-face {
+    font-display: swap;
+    font-weight: 500;
+    font-family: 'Roboto';
+    font-style: normal;
+    src: url(../fonts/Roboto-Medium.woff2) format("woff2")
+}
+
+@font-face {
+    font-display: swap;
+    font-weight: 700;
+    font-family: 'Roboto';
+    font-style: normal;
+    src: url(../fonts/Roboto-Bold.woff2) format("woff2")
+}
+
+/*Глобальные переменные */
+:root{
+    /* Шрифты */
+    --font-family-roboto: 'Roboto', Arial, Helvetica, sans-serif;
+    /* Основные цвета */
+    --light-sand: #FFE29D;
+    --peeled-almonds: #FCEECF;
+    --cosmic-cream: #FFF8E7;
+    --purple-white: #FFD3C9;
+    --pale-pinkish: #F4ECF6;
+    --lavender: #E5E7FA;
+    --cornflower-blue: #A5AFFB;
+    --pale-blue: #D5E9FA;
+    --gray-blue: #CAE5FF;
+    --light-blue: #A3BFEF;
+    --light-blue-60: rgba(163, 191, 239, 0.6); /*A3BFEF*/
+    --heavenly: #82C5FF;
+    --light-steel-blue: #B8D0E0;
+    --blue-frost: #E1F1FF;
+    --marengo: #4C5866;
+    --transparent-white-60: rgba(255, 255, 255, 0.6);
+    --transparent-white-80: rgba(255, 255, 255, 0.8);
+
+
+    /* Дополнительные цвета */
+    --blue: #007bff;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #dc3545;
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+    --green: #28a745;
+    --teal: #20c997;
+    --cyan: #17a2b8;
+    --white: #fff;
+    --black: #000;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: #929292;
+    --secondary: #6c757d;
+    --success: #28a745;
+    --info: #17a2b8;
+    --warning: #ffc107;
+    --danger: #dc3545;
+    --light: #f8f9fa;
+    --dark: #343a40;
+}
+
+html{
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    scroll-behavior: smooth;
+    -ms-touch-action: none;
+        touch-action: none;
+}
+  
+*,
+*::before,
+*::after{
+    -webkit-box-sizing: inherit;
+            box-sizing: inherit;
+}
+  
+a, a:focus, a:visited{
+    font-weight: 400;
+    color: inherit;
+    text-decoration: none;
+}
+
+ul{  
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+  
+h1, h2, h3, h4, h5, h6, p{
+    margin: 0;
+}
+
+body{
+    position: relative;
+    padding-bottom: 88px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    font-family: var(--font-family-roboto);
+    font-weight: 400;
+    font-size: 18px;
+    font-style: normal;
+    background-color: var(--color-lavender);
+}
+
+.hidden{
+    position: absolute;
+    visibility: hidden;
+}
+
+.btn-reset{
+    padding: 0;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.header__container{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 45px;
+    padding: 10px 30px;
+    width: 100%;
+    height: 95px;
+    box-shadow: 0 3px 16px rgba(0,0,0,.5);
+    background-color: var(--marengo);
+}
+
+.header__logo{
+
+}
+
+.header__title{
+    margin-left: 20px;
+    margin-top: 20px;
+    font-weight: 700;
+    font-size: 36px;
+    color: var(--white);
+}
+
+.header__nav{
+    margin-left: 160px;
+    font-weight: 700;
+    line-height: 1.5em;
+    color: var(--marengo)
+}
+
+.nav__list{
+    display: flex;
+    flex-direction: row;
+}
+
+.nav__link{
+    text-decoration-line: underline;
+}
+
+.nav__arrow{
+    margin-left: 7px;
+    width: 10px;
+}
+
+.nav__arrow svg{
+    height: 16px;
+}
+
+.main--background{
+    background-color: var(--lavender);
+}
+
+section{
+    padding: 0 142px;
+}
+
+.section__line{
+    margin: 0;
+    background-color: var(--lavender);
+    height: 6px;
+    border: none;
+}
+
+/* Фильтр */
+
+.filter{
+    background-color: var(--white);
+}
+
+.filter__container{
+    margin: 30px 18px;
+}
+
+.filter__form{
+    display: flex;
+    flex-direction: row;
+} 
+
+.form__select-wrap{
+    position: relative;
+}
+
+.form__select-wrap select{
+    padding: 20px 20px;
+    border-radius: 20px;
+    border: none;
+    background-color: var( --gray-blue);
+    cursor: pointer;
+
+    /* Убираем кастомную стрелку */
+    /* for Firefox */
+	-moz-appearance: none;
+	/* for Chrome */
+	-webkit-appearance: none;
+}
+
+
+.form__select-wrap select:-ms-expand {
+	/* IE */
+	display: none;
+}
+
+.form__select-wrap::after{
+    content: '';
+    position: absolute;
+    top: 25px;
+    right: 12px;
+    width: 25px;
+    height: 12px;
+    /* Курсор не реагирует на псевдоэлемент */
+    pointer-events: none; 
+    background: url(../img/svg/select-arrow.svg);
+}
+
+.form__education-level{
+    width: 290px;
+}
+
+.form__year{
+    margin-left: 60px;
+    width: 150px;
+}
+
+.form__btn-sumbit{
+    margin-left: 70px;
+    padding: 10px 60px;
+    font-size: 22px;
+    background-color: var(--peeled-almonds);
+    border: 1px solid var(--light-sand);
+    border-radius: 45px;
+}
+
+.date{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    box-shadow: 0 10px 5px 2px rgba(0,0,0,.2);
+    background-color: var(--white);
+    z-index: 1;
+}
+
+.date__container, .date__description{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 626px;
+    color: var(--marengo);
+}
+
+.date__title{
+    font-weight: 700;
+    font-size: 36px;
+}
+
+.date__description{
+    margin-top: 24px;
+    padding-top: 15px;
+    font-weight: 400;
+    font-size: 20px;
+    border-top: 6px solid var(--light-blue-60);
+}
+
+.date__btn{
+    margin: 0 auto;
+    margin-top: auto;
+}
+
+/* Область расписания */
+.timetable{
+    margin-top: 40px;
+    color: var(--marengo);
+}
+
+.timetable__list-institutes{
+   
+}
+
+.institutes__item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 50px 0;
+}
+
+.institutes__item:not(:last-of-type){
+    border-bottom: 6px solid var(--lavender);  
+}
+
+.item__title-institute{
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 42px;
+}
+
+.item__list-institute{
+    /* display: flex;
+    flex-wrap: wrap; */
+    margin-left: 20px;
+    padding: 50px 70px;
+    border-left: 3px solid var(--light-steel-blue);
+}
+
+/* .institute__item{
+   
+}
+
+.institute__item:not(:nth-of-type(3n+4)){
+    margin-left: 100px;
+}
+
+.institute__item:first-of-type{
+    margin-left: 0;
+}
+ */
+.institute__item{
+    margin-bottom: 50px;
+}
+
+.btn-group{
+    display: block;
+    padding: 20px 0;   
+    font-size: 24px;
+    text-align: center;
+    background-color: var(--pale-pinkish);
+    border-radius: 45px;
+    border: 1px solid var(--cornflower-blue);
+}
+
+
+/* На странице с расписанием */
+.timetable-group{
+    padding: 0;
+    min-height: 90vh;
+    background-color: var(--lavender);
+}
+
+/* .timetable-group__container{
+    margin-left: 142px;
+    margin-right: 142px;
+} */
+
+
+.timetable__list-container{
+    margin-top: -40px;
+    padding: 8px 0;
+    background-color: var(--transparent-white-80);
+    border-radius: 0 0 45px 45px;
+    box-shadow: 0 3px 10px rgba(0,0,0,.5)
+}
+
+.timetable__list-names{
+    display: flex;
+}
+
+/* .timetable-names__item:first-of-type{
+    margin-left: 268px;
+} */
+
+.timetable-names__item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;
+    height: 78px;
+    border-left: 3px solid var(--light-blue);
+}
+
+.timetable-name__description{
+    font-size: 20px;
+    color: var(--black);
+}
+
+.timetable__list-weekdays{
+    margin-top: 20px;
+    padding-bottom: 80px;
+}
+
+/* Размеры колонок */
+
+/* .timetable-number--1{
+    justify-content: center;
+    width: 175px;
+    text-align: center;
+}
+.timetable-number--2{
+    width: 420px;
+}
+.timetable-number--3{
+    width: 155px;
+}
+.timetable-number--4{
+    width: 235px;
+}
+.timetable-number--5{
+    width: 135px;
+}
+.timetable-number--6{
+    width: 180px;
+} */
+
+/* Занятия по дням */
+.weekdays__item{
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+    padding: 32px 0;
+    /* padding: 32px 42px; */
+    background-color: var(--transparent-white-60);
+    border-radius: 70px;
+    box-shadow: 0 0px 8px rgba(0,0,0,.5)
+}
+
+.day__container{
+    /* margin-right: 32px;
+    min-width: 194px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 26px;
+}
+
+.day__list{
+
+}
+
+.day__item{
+    padding: 0;
+}
+
+
+.lesson__list{
+    display: flex;
+    flex-direction: row;
+}
+
+.lesson__list:not(:first-of-type){
+    border-top: 3px solid var(--light-blue);
+}
+
+.lesson__item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 15px;
+    text-align: center;
+    font-size: 20px;
+    color: var(--black);
+    border-left: 3px solid var(--light-blue);
+}
+
+.lesson__item:not(:nth-last-of-type(5)){
+    justify-content: center;
+    text-align: center;
+}
+
+/* Подвал */
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+/* .no-fixed{
+    position: static;
+} */
+
+.footer__container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 15px 154px;
+    height: 100%;
+    background-color: var(--marengo);
+}
+
+.footer__title{
+    line-height: 1.2em;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.footer__description{
+    font-weight: 500;
+}
+
+.footer__link-container{
+    margin-left: auto;
+}
+
+.footer__link:not(:first-of-type){
+    margin-left: 30px;
+}
+
+
+@media (min-width: 1400px){
+    .timetable-group__container{
+        max-width: 1616px;
+    }
+
+    .timetable__list-institutes{
+        max-width: 1920px;
+    }
+}
