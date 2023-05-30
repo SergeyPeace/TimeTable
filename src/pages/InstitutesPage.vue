@@ -71,9 +71,6 @@ export default{
             return show
         }).sort((a, b)=>{
             let reg = /\d{1}-[А-Я]+-/
-            console.log(a)
-            console.log(a.match(reg)[0].length)
-            console.log(a.slice(a.match(reg)[0].length))
             if ( Number(a.slice(a.match(reg)[0].length)) > Number(b.slice(b.match(reg)[0].length))) return 1
             else if ( Number(a.slice(a.match(reg)[0].length)) < Number(b.slice(b.match(reg)[0].length))) return -1
             else{return 0}
@@ -103,9 +100,6 @@ export default{
             return show
         }).sort((a, b)=>{
             let reg = /\d{1}-[А-Я]+-/
-            console.log(a)
-            console.log(a.match(reg)[0].length)
-            console.log(a.slice(a.match(reg)[0].length))
             if ( Number(a.slice(a.match(reg)[0].length)) > Number(b.slice(b.match(reg)[0].length))) return 1
             else if ( Number(a.slice(a.match(reg)[0].length)) < Number(b.slice(b.match(reg)[0].length))) return -1
             else{return 0}
