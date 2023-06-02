@@ -319,7 +319,7 @@ section{
 .institutes__item{
     display: flex;
     flex-direction: row;
-    align-items: center;
+    /* align-items: center; */
     padding: 50px 0;
 }
 
@@ -341,18 +341,6 @@ section{
     border-left: 3px solid var(--light-steel-blue);
 }
 
-/* .institute__item{
-   
-}
-
-.institute__item:not(:nth-of-type(3n+4)){
-    margin-left: 100px;
-}
-
-.institute__item:first-of-type{
-    margin-left: 0;
-}
- */
 .institute__item{
     margin-bottom: 50px;
 }
@@ -416,29 +404,6 @@ section{
     padding-bottom: 80px;
 }
 
-/* Размеры колонок */
-
-/* .timetable-number--1{
-    justify-content: center;
-    width: 175px;
-    text-align: center;
-}
-.timetable-number--2{
-    width: 420px;
-}
-.timetable-number--3{
-    width: 155px;
-}
-.timetable-number--4{
-    width: 235px;
-}
-.timetable-number--5{
-    width: 135px;
-}
-.timetable-number--6{
-    width: 180px;
-} */
-
 /* Занятия по дням */
 .weekdays__item{
     display: flex;
@@ -459,6 +424,11 @@ section{
     justify-content: center;
     align-items: center;
     font-size: 26px;
+}
+
+/* Первая буква дней недели заглавная */
+.day__title:first-letter{
+    text-transform: uppercase;
 }
 
 .day__list{
