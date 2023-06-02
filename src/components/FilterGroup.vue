@@ -1,7 +1,7 @@
 <template>
     <section class="filter">
             <div class="filter__container">
-                <form id="filter__form form" class="filter__form form" action="https://postman-echo.com/post" method="post">
+                <form id="filter__form form" class="filter__form form" >
                     <div class="form__select-wrap">
                         <select class="form__education-level" :value="selectedLevel" @input="set({selectedLevel: $event.target.value})">
                             <option disabled value='0' v-show="selectedLevel < 1">Уровень образования</option> 
@@ -21,8 +21,8 @@
 
                         </select>
                     </div>
-                    <!-- <input placeholder="Номер группы" :value="selectedKurs" @input="set({selectedKurs: $event.target.value})"> -->
-                    <button class="btn-reset form__btn-sumbit" type="submit">Поиск</button>
+                    <input placeholder="Номер группы" :value="inputGroupName" @input="set({inputGroupName: $event.target.value})">
+                    <button class="btn-reset form__btn-sumbit" type="submit" @click.prevent=" clearForm()">Очистить</button>
                 </form>
                 <!-- <a href="https://hspm.ru/u/files/raspisaniye-studentov-ochnoy-formy-imt-vshpm-ii-polugodiye-2022-2023-uch_20230512112137.xlsx" target="_blank" rel="noopener noreferrer">
                     <svg style="width: 2em" aria-hidden="true" data-prefix="fas" data-icon="file-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="files__item_file-icon svg-inline--fa fa-file-alt fa-w-12">
@@ -39,10 +39,13 @@
 import {mapState, mapMutations} from "vuex";
 export default{
     computed: {
-        ...mapState(['selectedLevel', 'selectedKurs']),
+        ...mapState(['selectedLevel', 'selectedKurs', 'inputGroupName']),
     },
     methods:{
-        ...mapMutations(['set'])
+        ...mapMutations(['set']),
+        clearForm(){
+            this.set({selectedLevel: 0, selectedKurs: 0, inputGroupName: '',})
+        },
     },
 }
 </script>

@@ -44,7 +44,7 @@
                 <li class="weekdays__item day row" v-for="(items, day) in timetable" :key="day">
                     <div class="day__container col-2">
                         <h3 class="day__title">{{day}}</h3>
-                        <p class="day__description">01.09.2023</p>
+                        <p class="day__description" >{{weekDates.daysNames[dayName.indexOf(day)]}}</p>
                     </div>
                     <ul class="day__list col-10">
                         <li class="day__item lesson container">
@@ -54,7 +54,15 @@
                                 <li class="lesson__item col-2" v-html="item.lessonType"></li>
                                 <!-- <li class="lesson__item col-2">-</li> -->
                                 <li class="lesson__item col-2" v-html="item.room"></li>
-                                <li class="lesson__item col-1"></li>
+                                <li class="lesson__item col-1">
+                                    <a :href="item.address" target="_blank" v-if="item.address.length > 0">
+                                        <svg width="39" height="49" viewBox="0 0 39 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M37.6326 19.5C37.6326 29.997 19.1326 47 19.1326 47C19.1326 47 2.13275 29.5 1.09644 20C0.0601171 10.5 7.49308 0.999986 18.1326 1C28.6327 1.00001 37.6326 9.00296 37.6326 19.5Z" stroke="#A3BFEF" stroke-width="2"/>
+                                            <circle cx="19.1328" cy="20" r="7.5" fill="#CAE5FF" stroke="#A3BFEF" stroke-width="2"/>
+                                        </svg>
+                                    </a>
+                                    <span v-else>—</span>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -67,10 +75,10 @@
 import dayjs from 'dayjs'
 import {mapState, mapGetters} from "vuex";
 
-
 export default{
     data:()=>({
             paginationNext: 1,
+            dayName: ['понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'],
         }),
     computed:{
         ...mapState(['imt', 'ipto']),
@@ -78,17 +86,25 @@ export default{
 
         // Возвращает дату начала и дату конца текущей недели
         weekDates(){
-            let curr = new Date 
-            let curr2 = new Date
+            let curr = new Date() 
+            let curr2 = new Date()
+            let currDay = new Date()
             let dow = curr.getDay()
             if (dow === 0){
                 dow = 7
             }
             let first = curr.getDate() - dow + this.paginationNext
             let last = curr2.getDate() - dow  + 6 + this.paginationNext
-            let firstday = new Date(curr.setDate(first))
+            let firstday = new Date(currDay.setDate(first-1))
+            
+            let daysNames = []
+            for (let i = 0; i < 6; i++){
+                let day = new Date(firstday.setDate(firstday.getDate()+1))
+                daysNames.push(String(day.toLocaleDateString()))
+            }
+            firstday = new Date(curr.setDate(first))
             let lastday = new Date(curr2.setDate(last))
-            return {firstday, lastday}
+            return {firstday, lastday, daysNames}
         },
 
         //Возвращает номер недели
@@ -123,7 +139,7 @@ export default{
 
         //Возвращает объект с информацией занятий по группе
         timetable(){
-            let day, time, description, room, lessonType
+            let day, time, description, room, lessonType, address
             let res = {}
             for(let i = 5; i < this.instituteData.length; i++){
                 let row = this.instituteData[i]
@@ -149,7 +165,7 @@ export default{
                         }
 
 
-                        let regexlessonType = /(\(.{1,10}\d+.+\))|(\(прак.\))|(\(лекц\..*\))/gi
+                        let regexlessonType = /(\(.{1,10}\d+.+\))|(\(прак.\))|(\(лекц\..*\))|(\(лек\..*\))|(\(л.р\..*\))/gi
                         //Вывод информации о виде занятий из общей строки
                         if(description.indexOf(';')){ //в случае сдвоенных предметов
                             let pie = description.split(';')
@@ -179,8 +195,11 @@ export default{
                             // description = description.slice(0 , description.length - (addressMokhovaya.length))
                             // room = addressMokhovaya.slice(1)
                             room = 'ул. Моховая, д. 26'
-                            description = String(description.replace(addressMokhovaya, ''))  
+                            description = String(description.replace(addressMokhovaya, ''))
+                            address = ['https://yandex.ru/maps/2/saint-petersburg/?ll=30.347802%2C59.942172&mode=usermaps&source=constructorLink&um=constructor%3A80c1d043b17b1b6ef1fd6ca0dc1986807c705387ee4a072a81364cdbb8d6f6ed&z=17']
                         }
+
+
 
                         //Вывод информации об аудитории из общей строки
                         let regexRoom = /(, *[А-Я]\d{3})|([А-Я]\d{3}|(, ДО))/g
@@ -192,24 +211,43 @@ export default{
                             }
 
                             //Здесь для любых
+                            // address = []
                             room = ''
                             let arrayRoom = description.match(regexRoom)
                             arrayRoom.forEach(e => {
                                 if(/(, ДО)/g.test(e)){
                                     lineLength = 2
                                 }
-                                else if(regexRoomPoint.test(e)){
+                                else if(/[А-Я]\d{3}\.\d{1}/.test(e)){
                                     lineLength = 6
                                 } else{
                                     lineLength = 4
                                 }
-                                room = room + e.slice(e.length - lineLength, e.length) + '<br/>'                     
+                                room = room + e.slice(e.length - lineLength, e.length) + '<br/>'       
+                                
+                                // if(/(.*[Дд]\d*)/.test(e)){
+                                //     address = address.push('https://yandex.ru/maps/2/saint-petersburg/?ll=30.335917%2C59.925163&mode=usermaps&source=constructorLink&um=constructor%3A80c1d043b17b1b6ef1fd6ca0dc1986807c705387ee4a072a81364cdbb8d6f6ed&z=17')
+                                // }
+                                // else if(/(.*[Вв]\d*)/.test(e)){
+                                //     address = address.push('https://yandex.ru/maps/2/saint-petersburg/?ll=30.309389%2C59.921271&mode=usermaps&source=constructorLink&um=constructor%3A80c1d043b17b1b6ef1fd6ca0dc1986807c705387ee4a072a81364cdbb8d6f6ed&z=17')
+                                // }
+          
                             })
                             description = description.replace((regexRoom), '') 
                         }
 
+
+                        if(/(.*[Дд]\d.*)/.test(room)){
+                            address = ['https://yandex.ru/maps/2/saint-petersburg/?ll=30.335917%2C59.925163&mode=usermaps&source=constructorLink&um=constructor%3A80c1d043b17b1b6ef1fd6ca0dc1986807c705387ee4a072a81364cdbb8d6f6ed&z=17']
+                        }
+                        else if(/(.*[Вв]\d.*)/.test(room)){
+                            address = ['https://yandex.ru/maps/2/saint-petersburg/?ll=30.309389%2C59.921271&mode=usermaps&source=constructorLink&um=constructor%3A80c1d043b17b1b6ef1fd6ca0dc1986807c705387ee4a072a81364cdbb8d6f6ed&z=17']
+                        } else {
+                            address =[]
+                        }
+
                         res[day]??=[]
-                        res[day].push({time, description, room, lessonType})
+                        res[day].push({time, description, room, lessonType, address})
                     }
                 }
             }
@@ -225,7 +263,7 @@ export default{
     },
     watch:{
         weekNumber(){
-            console.log(new Date )
+            
         },
     }
 

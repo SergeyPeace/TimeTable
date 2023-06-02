@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { read, utils} from 'xlsx';
+import {read, utils} from 'xlsx';
 
 Vue.use(Vuex)
 
@@ -21,6 +21,7 @@ export default new Vuex.Store({
     ipto: null,
     selectedLevel: 0,
     selectedKurs: 0,
+    inputGroupName: '',
   },
   mutations: {
     set(state, set){
@@ -31,8 +32,8 @@ export default new Vuex.Store({
   },
   actions: {
     async onLoad({commit}){
-      let imt = await download('./raspisaniye_mt.xlsx')
-      let ipto = await download('./raspisaniye_ptio.xls')
+      let imt = await download('/raspisaniye_mt.xlsx')
+      let ipto = await download('/raspisaniye_ptio.xls')
 
       commit('set', {imt, ipto})
     }

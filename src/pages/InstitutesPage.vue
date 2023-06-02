@@ -5,7 +5,7 @@
             <h2 class="timetable__title" v-show="(filteredImtGroup.length < 1) && (filteredIptoGroup.length < 1) && ((Number(selectedLevel) === 0)||Number(selectedKurs) === 0)">Уровень образования и курс не выбраны</h2>
             <h2 class="timetable__title" v-show="(filteredImtGroup.length < 1) && (filteredIptoGroup.length < 1) && ((Number(selectedLevel) > 0)||Number(selectedKurs) > 0)">Группы не найдены</h2>
             <ul class="timetable__list-institutes institutes container">
-                <li class="institutes__item item row" v-show="filteredImtGroup.length > 0">
+                <li class="institutes__item item row" v-if="filteredImtGroup.length > 0">
                     <div class="item__conteiner-title col-12 col-xl-4">
                         <h2 class="item__title-institute">Институт медиатехнологий</h2>
                     </div>
@@ -18,7 +18,7 @@
                     </div>
                 </li>
                 
-                <li class="institutes__item item row" v-show="filteredIptoGroup.length > 0">
+                <li class="institutes__item item row" v-if="filteredIptoGroup.length > 0">
                     <div class="item__conteiner-title col-12 col-xl-4">
                         <h2 class="item__title-institute">Институт полиграфических технологий и оборудования</h2>
                     </div>
@@ -46,12 +46,16 @@ export default{
         FilterGroup,
     },
     computed: {
-    ...mapState(['imt', 'ipto', 'selectedLevel', 'selectedKurs']),
+    ...mapState(['selectedLevel', 'selectedKurs', 'inputGroupName']),
     ...mapGetters(['iptoGroups', 'imtGroups']),
     filteredImtGroup(){
         return this.imtGroups?.filter(v => {
             let show = true
-            if ((parseInt(this.selectedLevel) > 0) || (parseInt(this.selectedKurs) > 0)){
+            
+            if ((parseInt(this.selectedLevel) > 0) || (parseInt(this.selectedKurs) > 0) || (this.inputGroupName.length > 0)){
+                if (this.inputGroupName.length > 0){
+                    show &&= v.includes(this.inputGroupName.toUpperCase())
+                }
                 if (parseInt(this.selectedKurs) > 0){
                     show &&= parseInt(v[0]) === parseInt(this.selectedKurs)
                 }
@@ -79,7 +83,10 @@ export default{
     filteredIptoGroup(){
         return this.iptoGroups?.filter(v => {
             let show = true
-            if ((parseInt(this.selectedLevel) > 0) || (parseInt(this.selectedKurs) > 0)){
+            if ((parseInt(this.selectedLevel) > 0) || (parseInt(this.selectedKurs) > 0) || (this.inputGroupName.length > 0)){
+                if (this.inputGroupName.length > 0){
+                    show &&= v.includes(this.inputGroupName.toUpperCase())
+                }
                 if (parseInt(this.selectedKurs) > 0){
                     show &&= parseInt(v[0]) === parseInt(this.selectedKurs)
                 }
