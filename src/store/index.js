@@ -32,8 +32,8 @@ export default new Vuex.Store({
   },
   actions: {
     async onLoad({commit}){
-      let imt = await download('/raspisaniye_mt.xlsx')
-      let ipto = await download('/raspisaniye_ptio.xls')
+      let imt = await download('./raspisaniye_mt.xlsx')
+      let ipto = await download('./raspisaniye_ptio.xls')
 
       commit('set', {imt, ipto})
     }
