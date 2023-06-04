@@ -2,8 +2,9 @@
     <div>
         <filter-group/>
         <section class="timetable">
-            <h2 class="timetable__title" v-show="(filteredImtGroup.length < 1) && (filteredIptoGroup.length < 1) && ((Number(selectedLevel) === 0)||Number(selectedKurs) === 0)">Уровень образования и курс не выбраны</h2>
-            <h2 class="timetable__title" v-show="(filteredImtGroup.length < 1) && (filteredIptoGroup.length < 1) && ((Number(selectedLevel) > 0)||Number(selectedKurs) > 0)">Группы не найдены</h2>
+           
+            <h2 class="timetable__title" v-show="(filteredImtGroup.length < 1) && (filteredIptoGroup.length < 1) && ((Number(selectedLevel) === 0)||Number(selectedKurs) === 0) && inputGroupName.length === 0">Уровень образования и курс не выбраны</h2>
+            <h2 class="timetable__title" v-show="(filteredImtGroup.length < 1) && (filteredIptoGroup.length < 1) && ((Number(selectedLevel) > 0)||Number(selectedKurs) > 0 || inputGroupName.length > 0)">Группы не найдены</h2>
             <ul class="timetable__list-institutes institutes container">
                 <li class="institutes__item item row" v-if="filteredImtGroup.length > 0">
                     <div class="item__conteiner-title col-12 col-xl-4">

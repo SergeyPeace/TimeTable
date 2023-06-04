@@ -44,16 +44,21 @@
     --pale-pinkish: #F4ECF6;
     --lavender: #E5E7FA;
     --cornflower-blue: #A5AFFB;
-    --pale-blue: #D5E9FA;
+    --pale-blue: #DEEDFA;
     --gray-blue: #CAE5FF;
     --light-blue: #A3BFEF;
     --light-blue-60: rgba(163, 191, 239, 0.6); /*A3BFEF*/
     --heavenly: #82C5FF;
+    --diamond-blue: #3A6890;
     --light-steel-blue: #B8D0E0;
     --blue-frost: #E1F1FF;
     --marengo: #4C5866;
+    --violet: #6D31EE;
     --transparent-white-60: rgba(255, 255, 255, 0.6);
     --transparent-white-80: rgba(255, 255, 255, 0.8);
+
+    /* Анимация */
+    --animation-standart: 0.3s ease;
 
 
     /* Дополнительные цвета */
@@ -148,8 +153,9 @@ body{
     background-color: var(--marengo);
 }
 
-.header__logo{
-
+.header__logo:focus-visible{
+    outline: 1px solid var(--white);
+    border-radius: 5px;
 }
 
 .header__title{
@@ -173,6 +179,22 @@ body{
 }
 
 .nav__link{
+    text-decoration-line: underline;
+}
+
+.nav__link:focus{
+    color: #41A6FF;
+    text-decoration-line: underline;
+    outline: none;
+}
+
+.nav__link:hover{
+    color: #8D8E9A;
+    text-decoration-line: underline;
+}
+
+.nav__link:active{
+    color: #41A6FF;
     text-decoration-line: underline;
 }
 
@@ -260,14 +282,71 @@ section{
     width: 150px;
 }
 
+.form__input-container{
+    position: relative;
+    margin-left: 60px;
+}
+
+.form__input, .form__input:active{
+    position: relative;
+    padding: 20px 20px;
+    padding-left: 46px;
+    background-color: var(--gray-blue);
+    border-radius: 20px;
+    border: none;
+    outline: 2px solid var(--light-blue);
+    outline-offset: -2px;
+    transition: background-color var(--animation-standart);
+}
+
+.form__input:hover{
+    background-color: var(--blue-frost);
+}
+
+
+.form__input:focus{
+    outline: 2px solid var(--violet);
+}
+
+
+.form__input-container::before{
+    position: absolute;
+    content: '';
+    top: 20px;
+    left: 14px;
+    width: 22px;
+    height: 22px;
+    background-image: url(../img/svg/loupe.svg);
+    z-index: 1;
+}
+
 .form__btn-sumbit{
     margin-left: 70px;
     padding: 10px 60px;
     font-size: 22px;
     background-color: var(--peeled-almonds);
-    border: 1px solid var(--light-sand);
+    outline: 1px solid var(--light-sand);
+    outline-offset: -1px;
     border-radius: 45px;
+    transition: background-color var(--animation-standart);
 }
+
+.form__btn-sumbit:hover{
+    background-color: var(--light-sand);
+}
+
+.form__btn-sumbit:focus{
+    outline-offset: -3px;
+    outline: 3px solid var(--purple-white);
+}
+
+.form__btn-sumbit:active{
+    outline: 1px;
+    background-color: var(--purple-white);
+    
+}
+
+
 
 .date{
     position: relative;
@@ -284,7 +363,7 @@ section{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 626px;
+    min-width: 626px;
     color: var(--marengo);
 }
 
@@ -305,6 +384,27 @@ section{
     margin: 0 auto;
     margin-top: auto;
 }
+
+.date__btn svg path{
+    transition: all var(--animation-standart);
+}
+
+.date__btn:focus-visible svg path{
+    stroke: var(--violet);
+}
+
+.date__btn:hover svg path{
+    fill: var(--gray-blue);
+    stroke: var(--gray-blue);
+}
+
+
+.date__btn:active svg path{
+    fill: var(--heavenly);
+    stroke: var(--heavenly);
+}
+
+
 
 /* Область расписания */
 .timetable{
@@ -345,7 +445,38 @@ section{
     margin-bottom: 50px;
 }
 
+
+
+
 .btn-group{
+    display: block;
+    padding: 20px 0;   
+    font-size: 24px;
+    text-align: center;
+    color: var(--black) !important;
+    background-color: var(--pale-pinkish);
+    border-radius: 45px;
+    outline: 1px solid var(--cornflower-blue);
+    outline-offset: -1px;
+    transition: background-color var(--animation-standart);
+}
+
+.btn-group:hover{
+    background-color: var(--lavender);
+}
+
+.btn-group:focus{
+    outline-offset: -3px;
+    outline: 3px solid var(--cornflower-blue);
+    border: none;
+}
+
+.btn-group:active{
+    outline: 1px;
+    background-color: var(--cornflower-blue);
+}
+
+/* .btn-group{
     display: block;
     padding: 20px 0;   
     font-size: 24px;
@@ -353,7 +484,35 @@ section{
     background-color: var(--pale-pinkish);
     border-radius: 45px;
     border: 1px solid var(--cornflower-blue);
+} */
+
+/* .btn-group {
+    display: block;
+    border-radius: 45px;
+    padding: 1em 2em;
+    background: linear-gradient(168deg, var(--pale-pinkish), var( --cornflower-blue));
+    border: none;
+    color: #3b4550;
+    font-size: 24px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    transition: box-shadow 0.25s ease 0s;
+    letter-spacing: 0.08rem;
+    -webkit-transition: background 2s ease-out;  
+    -moz-transition: background 2s ease-out;  
+    -o-transition: background 2s ease-out;  
+    transition: background 2s ease-out;  
 }
+   
+.btn-group:hover,
+.btn-group:focus {
+    background: linear-gradient(117deg, var( --cornflower-blue), var(--pale-pinkish));
+    background-position: top;
+    box-shadow: 0 0.1rem 0.8rem #8B96EE;
+} */
+
 
 
 /* На странице с расписанием */
@@ -371,7 +530,6 @@ section{
 
 .timetable__list-container{
     margin-top: -40px;
-    padding: 8px 0;
     background-color: var(--transparent-white-80);
     border-radius: 0 0 45px 45px;
     box-shadow: 0 3px 10px rgba(0,0,0,.5)
@@ -381,17 +539,22 @@ section{
     display: flex;
 }
 
-/* .timetable-names__item:first-of-type{
-    margin-left: 268px;
-} */
 
 .timetable-names__item{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 15px;
+    padding: 8px 15px;
     height: 78px;
-    border-left: 3px solid var(--light-blue);
+    /* border-left: 3px solid var(--light-blue); */
+}
+
+.timetable-names__item:nth-last-of-type(2n+1){
+    background-color: var(--pale-blue);
+}
+
+.timetable-names__item:last-of-type{
+    border-radius: 0 0 45px 0;
 }
 
 .timetable-name__description{
@@ -409,7 +572,7 @@ section{
     display: flex;
     flex-direction: row;
     margin-top: 40px;
-    padding: 32px 0;
+    /* padding: 32px 0; */
     /* padding: 32px 42px; */
     background-color: var(--transparent-white-60);
     border-radius: 70px;
@@ -424,12 +587,15 @@ section{
     justify-content: center;
     align-items: center;
     font-size: 26px;
+    color: var(--diamond-blue);
 }
 
 /* Первая буква дней недели заглавная */
 .day__title:first-letter{
     text-transform: uppercase;
 }
+
+
 
 .day__list{
 
@@ -457,13 +623,69 @@ section{
     text-align: center;
     font-size: 20px;
     color: var(--black);
-    border-left: 3px solid var(--light-blue);
+    /* border-left: 3px solid var(--light-blue); */
+}
+
+.item-type__description{
+    display: none;
+}
+
+.lesson__item:nth-of-type(2n+1){
+    background-color: var(--pale-blue);
+}
+
+.lesson__list:first-of-type .lesson__item{
+    padding-top: 32px;
+}
+
+.lesson__list:last-of-type .lesson__item{
+    padding-bottom: 32px;
+}
+
+.lesson__list:first-of-type .lesson__item:last-of-type{
+    border-top-right-radius: 70px;
+}
+
+.lesson__list:last-of-type .lesson__item:last-of-type{
+    border-bottom-right-radius: 70px;
+}
+
+.lesson__item-time, .lesson__item-room{
+    color: var(--diamond-blue);
 }
 
 .lesson__item:not(:nth-last-of-type(5)){
     justify-content: center;
     text-align: center;
 }
+
+.lesson__item-link svg path, .lesson__item-link svg circle{
+    stroke: #858fcc;
+}
+
+.lesson__item-link:focus{
+    outline: none;
+}
+
+.lesson__item-link svg path, .lesson__item-link svg circle{
+    transition: all var(--animation-standart);
+}
+
+.lesson__item-link:hover svg path, .lesson__item-link:hover svg circle{
+    stroke: var(--violet);
+}
+
+.lesson__item-link:focus-visible svg path, .lesson__item-link:focus-visible svg circle{
+    stroke: var(--violet);
+}
+
+.lesson__item-link:active svg path, .lesson__item-link:active svg circle{
+    stroke: var(--heavenly);
+}
+
+
+
+
 
 /* Подвал */
 footer{
@@ -480,7 +702,7 @@ footer{
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 15px 154px;
+    padding: 15px 120px;
     height: 100%;
     background-color: var(--marengo);
 }
@@ -504,6 +726,39 @@ footer{
     margin-left: 30px;
 }
 
+.footer__link:focus{
+    outline: none;
+}
+
+.footer__link svg path{
+    transition: all var(--animation-standart);
+}
+
+.footer__link:hover svg path{
+    fill: #FFD3C9;
+
+}
+/* sutd */
+
+.link-sutd:active svg path, .link-sutd:focus-visible svg path{
+    fill: #FFEF63;
+}
+
+/* vk */
+.link-vk:active svg path, .link-vk:focus-visible svg path{
+    fill: #06D5E2;
+}
+/* youtube */
+
+.link-youtube:active svg path, .link-youtube:focus-visible svg path{
+    fill: #FB4C69;
+}
+
+.footer__container-short{
+    display: none;
+}
+
+
 
 @media (min-width: 1400px){
     .timetable-group__container{
@@ -513,4 +768,273 @@ footer{
     .timetable__list-institutes{
         max-width: 1920px;
     }
+}
+
+
+@media (max-width: 1400px){
+    .day__container{
+        font-size: 22px;
+    }
+    
+}
+
+
+@media (max-width: 1200px){
+    .day__container{
+        font-size: 20px;
+    }
+
+    .item-type__description{
+        display: none;
+    }
+
+    .footer__container{
+        padding: 10px 35px;
+        font-weight: 600;
+    }
+}
+
+
+@media (max-width: 990px){
+    .day__title{
+        font-size: 24px;
+    }
+    .timetable__list-container{
+        display: none;
+    }
+
+    .weekdays__item{
+        padding: 0;
+        padding-top: 25px;
+        border-radius: 30px;
+    }
+
+    .day__container{
+        margin-left: 20px;
+        padding: 10px 15px;
+        border-radius: 2px;
+        font-size: 20px;
+        font-weight: 400;
+        color: var(--white);
+        background-color: var(--diamond-blue);
+    }
+
+    .lesson__list:first-of-type .lesson__item, .lesson__item{
+        padding-top: 10px;
+    }
+
+    .lesson__item-link svg{
+        width: 28px;
+    }
+
+    .lesson__list{
+        margin-top: 24px;    
+    }
+
+    .lesson__list:not(:first-of-type){
+        border: none;
+    }
+
+    .lesson__item-time{
+        font-weight: 600;
+    }
+
+    .item-time__br{
+        display: none;
+    }
+
+    .lesson__item{
+        align-items: end;
+    }
+
+    .lesson__item:not(:first-of-type){
+        background-color: var(--pale-blue);
+    }
+    
+    .lesson__item:first-of-type{
+        font-size: 16px;
+        background-color: inherit;
+    }
+    
+    .lesson__item:not(:nth-last-of-type(5)), .lesson__item {
+        justify-content: flex-start;
+        text-align: left;
+        padding-left: 20px;
+    }
+
+    .lesson__item-description{
+        font-weight: 500;
+    }
+
+    .lesson__item-room {
+        justify-content: flex-end !important;
+    }
+
+    .lesson__item-map{
+        position: relative;
+        align-items: end;
+    }
+
+    .lesson__item-link{
+        position: absolute;
+        bottom: 5px;
+        left: 5px;
+    }
+
+    .lesson__list:first-of-type .lesson__item:last-of-type{
+        border-radius: inherit;
+    }
+
+    .lesson__list:last-of-type .lesson__item{
+        padding-bottom: 14px;
+        text-align: start;
+    }
+
+    .lesson__list:last-of-type .lesson__item:last-of-type{
+        border-bottom-right-radius: 30px;
+    }
+
+
+    .lesson__list:last-of-type .lesson__item-type{
+        border-bottom-left-radius: 30px;      
+    }
+
+    .item-type__description{
+        display: inline;
+    }
+
+    .lesson__list:last-of-type .lesson__item-link{
+        bottom: 21px;     
+    }
+    
+    .lesson__list:last-of-type .lesson__item:nth-of-type(n+3){
+        padding-bottom: 30px;
+    }
+
+    .footer__link svg{
+        height: 27px;
+    }
+
+    .footer__link:not(:first-of-type){
+        margin-left: 10px;
+    }
+}
+
+
+
+@media (max-width: 574px){
+    .container{
+        width: 95%;
+    }
+
+    .weekdays__item{
+        border-radius: 5px;
+    }
+
+    .lesson__list:last-of-type .lesson__item:last-of-type {
+        border-bottom-right-radius: 5px;
+    }
+    
+    .lesson__list:last-of-type .lesson__item-type {
+        border-bottom-left-radius: 5px;
+    }
+    
+    .day__title{
+        font-size: 16px;
+    }
+    
+    .day__description{
+        font-size: 14px;
+    }
+
+    .lesson__item{
+        font-size: 12px;
+    }
+
+    .day__list{
+        padding: 0;
+    }
+
+    .lesson__item-description{
+        font-size: 14px;
+    }
+
+    .lesson__item-link svg{
+        width: 16px;
+        height: 20px;
+    }
+
+    .lesson__list:first-of-type .lesson__item, .lesson__item {
+        padding: 5px 0;
+        padding-left: 15px;
+    }
+
+    .lesson__item-link{
+        bottom: -10px;
+    }
+
+    .lesson__item-link{
+        position: absolute;
+        bottom: 5px;
+        left: 5px;
+    }
+
+    .lesson__item:not(:nth-last-of-type(5)), .lesson__item{
+        padding-left: 15px;
+    }
+
+    .footer__title{
+        display: none;
+    }
+
+    .footer__link svg{
+        height: 17px;
+        width: 17px;
+    }
+
+    .link-youtube{
+        width: 21px;
+    }
+
+    .footer__link:not(:first-of-type){
+        margin-left: 5px;
+    }
+
+    .footer__container-short{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .footer__logo-short img{
+        width: 32px;
+        height: 25px;
+    }
+
+    .footer__title-short{
+        margin-left: 10px;
+        line-height: 1.2em;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--white);
+    }   
+}
+
+@media (max-width: 500px){
+    .day__container{
+        margin-left: calc(var(--bs-gutter-x) * .5);
+    }
+
+    .day__list{
+        padding-right: calc(var(--bs-gutter-x) * .5);
+        padding-left: calc(var(--bs-gutter-x) * .5);
+    }
+
+    .lesson__list:first-of-type .lesson__item, .lesson__item {
+        padding-left: 5px;
+    }
+
+    .lesson__item:not(:nth-last-of-type(5)), .lesson__item{
+        padding-left: 5px;
+    } 
 }

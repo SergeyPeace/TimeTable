@@ -21,7 +21,9 @@
 
                         </select>
                     </div>
-                    <input placeholder="Номер группы" :value="inputGroupName" @input="set({inputGroupName: $event.target.value})">
+                    <div class="form__input-container">
+                        <input class="form__input" placeholder="Номер группы" :value="inputGroupName" @input="set({inputGroupName: $event.target.value})">
+                    </div>
                     <button class="btn-reset form__btn-sumbit" type="submit" @click.prevent=" clearForm()">Очистить</button>
                 </form>
                 <!-- <a href="https://hspm.ru/u/files/raspisaniye-studentov-ochnoy-formy-imt-vshpm-ii-polugodiye-2022-2023-uch_20230512112137.xlsx" target="_blank" rel="noopener noreferrer">

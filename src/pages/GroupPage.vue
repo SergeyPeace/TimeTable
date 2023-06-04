@@ -42,20 +42,20 @@
             </div>
             <ul class="timetable__list-weekdays weekdays__list">
                 <li class="weekdays__item day row" v-for="(items, day) in timetable" :key="day">
-                    <div class="day__container col-2">
+                    <div class="day__container col-5 col-xs-4 col-md-4 col-lg-2">
                         <h3 class="day__title">{{day}}</h3>
                         <p class="day__description" >{{weekDates.daysNames[dayName.indexOf(day)]}}</p>
                     </div>
-                    <ul class="day__list col-10">
+                    <ul class="day__list col-12 col-xs-12 col-md-12 col-lg-10">
                         <li class="day__item lesson container">
                             <ul class="lesson__list row" v-for="item in items" :key="item.time">
-                                <li class="lesson__item col-1" v-html="item.time"></li>
-                                <li class="lesson__item col-6" v-html="item.description"></li>
-                                <li class="lesson__item col-2" v-html="item.lessonType"></li>
+                                <li class="lesson__item lesson__item-time col-12 col-xs-4 col-md-4 col-lg-1" v-html="item.time"></li>
+                                <li class="lesson__item lesson__item-description col-12 col-xs-12 col-md-12 col-lg-6" v-html="item.description"></li>
+                                <li class="lesson__item lesson__item-type col-7 col-xs-7 col-md-7 col-lg-2" v-html="item.lessonType"></li>
                                 <!-- <li class="lesson__item col-2">-</li> -->
-                                <li class="lesson__item col-2" v-html="item.room"></li>
-                                <li class="lesson__item col-1">
-                                    <a :href="item.address" target="_blank" v-if="item.address.length > 0">
+                                <li class="lesson__item lesson__item-room col-4 col-xs-4 col-md-4 col-lg-2" v-html="item.room"></li>
+                                <li class="lesson__item lesson__item-map col-1 col-xs-1 col-md-1 col-lg-1">
+                                    <a :href="item.address" target="_blank" class="lesson__item-link" v-if="item.address.length > 0">
                                         <svg width="39" height="49" viewBox="0 0 39 49" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M37.6326 19.5C37.6326 29.997 19.1326 47 19.1326 47C19.1326 47 2.13275 29.5 1.09644 20C0.0601171 10.5 7.49308 0.999986 18.1326 1C28.6327 1.00001 37.6326 9.00296 37.6326 19.5Z" stroke="#A3BFEF" stroke-width="2"/>
                                             <circle cx="19.1328" cy="20" r="7.5" fill="#CAE5FF" stroke="#A3BFEF" stroke-width="2"/>
@@ -148,7 +148,7 @@ export default{
                 }
                 if (row[1]){
                     time = row[1]
-                    time = time.replace('-', '<br/>—<br/>')
+                    time = time.replace('-', '<br class="item-time__br"/>&ensp;—&ensp;<br class="item-time__br"/>')
                 }
                 if (row[this.groupIndex] ?? false){
                     let isUpWeek = i%2 > 0
@@ -160,7 +160,7 @@ export default{
                         // Проверка наличия другого указанного времени
                         if(Number(description[0])){
                             time= row[this.groupIndex].slice(0,11)
-                            time = time.replace('-', '<br/>—<br/>')
+                            time = time.replace('-', '<br class="item-time__br"/>&ensp;—&ensp;<br class="item-time__br"/>')
                             description = row[this.groupIndex].slice(12)
                         }
 
@@ -186,7 +186,7 @@ export default{
                             lessonType = String(description.match(regexlessonType)).slice(1, String(description.match(regexlessonType)).length - 1)
                             description = String(description.replace(regexlessonType, ''))
                         }
-
+                        lessonType = '<span class="item-type__description">Вид занятий:&emsp;</span>'+lessonType
 
                         //Проверка адреса Моховой
                         // let addressMokhovaya = ', ул. Моховая, д. 26'
@@ -196,7 +196,6 @@ export default{
                             // room = addressMokhovaya.slice(1)
                             room = 'ул. Моховая, д. 26'
                             description = String(description.replace(addressMokhovaya, ''))
-                            address = ['https://yandex.ru/maps/2/saint-petersburg/?ll=30.347802%2C59.942172&mode=usermaps&source=constructorLink&um=constructor%3A80c1d043b17b1b6ef1fd6ca0dc1986807c705387ee4a072a81364cdbb8d6f6ed&z=17']
                         }
 
 
@@ -211,7 +210,6 @@ export default{
                             }
 
                             //Здесь для любых
-                            // address = []
                             room = ''
                             let arrayRoom = description.match(regexRoom)
                             arrayRoom.forEach(e => {
@@ -242,7 +240,10 @@ export default{
                         }
                         else if(/(.*[Вв]\d.*)/.test(room)){
                             address = ['https://yandex.ru/maps/2/saint-petersburg/?ll=30.309389%2C59.921271&mode=usermaps&source=constructorLink&um=constructor%3A80c1d043b17b1b6ef1fd6ca0dc1986807c705387ee4a072a81364cdbb8d6f6ed&z=17']
-                        } else {
+                        } 
+                        else if(room === 'ул. Моховая, д. 26'){
+                            address = ['https://yandex.ru/maps/2/saint-petersburg/?ll=30.347802%2C59.942172&mode=usermaps&source=constructorLink&um=constructor%3A80c1d043b17b1b6ef1fd6ca0dc1986807c705387ee4a072a81364cdbb8d6f6ed&z=17']
+                        }else {
                             address =[]
                         }
 
