@@ -119,7 +119,6 @@ h1, h2, h3, h4, h5, h6, p{
 
 body{
     position: relative;
-    padding-bottom: 88px;
     min-height: 100vh;
     box-sizing: border-box;
     font-family: var(--font-family-roboto);
@@ -166,6 +165,10 @@ body{
     color: var(--white);
 }
 
+.header__title--short{
+    display: none;
+}
+
 .header__nav{
     margin-left: 160px;
     font-weight: 700;
@@ -199,7 +202,7 @@ body{
 }
 
 .nav__arrow{
-    margin-left: 7px;
+    margin: 0 7px;
     width: 10px;
 }
 
@@ -522,11 +525,6 @@ section{
     background-color: var(--lavender);
 }
 
-/* .timetable-group__container{
-    margin-left: 142px;
-    margin-right: 142px;
-} */
-
 
 .timetable__list-container{
     margin-top: -40px;
@@ -564,7 +562,7 @@ section{
 
 .timetable__list-weekdays{
     margin-top: 20px;
-    padding-bottom: 80px;
+    padding-bottom: 130px;
 }
 
 /* Занятия по дням */
@@ -754,7 +752,7 @@ footer{
     fill: #FB4C69;
 }
 
-.footer__container-short{
+.footer__container--short{
     display: none;
 }
 
@@ -796,6 +794,29 @@ footer{
 
 
 @media (max-width: 990px){
+    .header__container{
+        align-items: center;
+        height: 100%;
+    }
+
+    .header__logo img{
+        width: 54px;
+        height: 42px;
+    }
+
+    .header__title{
+        margin-top: 0;
+        font-size: 18px;
+    }
+
+    .header__nav{
+        margin-left: 30px;
+    }
+
+    .date__container, .date__description{
+        min-width: 350px;
+    }
+
     .day__title{
         font-size: 24px;
     }
@@ -812,6 +833,7 @@ footer{
     .day__container{
         margin-left: 20px;
         padding: 10px 15px;
+        
         border-radius: 2px;
         font-size: 20px;
         font-weight: 400;
@@ -923,8 +945,43 @@ footer{
 
 
 @media (max-width: 574px){
+
+    .header__container{
+        margin-bottom: 20px;
+    }
+
+    .nav__item{
+        font-size: 14px;
+    }
+
     .container{
         width: 95%;
+    }
+
+    .date{
+        padding: 15px 0;
+    }
+
+    .date__description {
+        margin-top: 5px;
+        border-top: 2px solid var(--light-blue-60);
+    }
+    
+    .date__title{
+        font-size: 20px;
+    }
+
+    .date__description{
+        font-size: 12px;
+    }
+
+    .date__btn svg{
+        width: 24px;
+        height: 39px;
+    }
+
+    .timetable__list-weekdays{
+        padding-bottom: 90px;
     }
 
     .weekdays__item{
@@ -992,26 +1049,26 @@ footer{
         width: 17px;
     }
 
-    .link-youtube{
+    .link-youtube svg{
         width: 21px;
     }
 
     .footer__link:not(:first-of-type){
-        margin-left: 5px;
+        margin-left: 10px;
     }
 
-    .footer__container-short{
+    .footer__container--short{
         display: flex;
         flex-direction: row;
         align-items: center;
     }
 
-    .footer__logo-short img{
+    .footer__logo--short img{
         width: 32px;
         height: 25px;
     }
 
-    .footer__title-short{
+    .footer__title--short{
         margin-left: 10px;
         line-height: 1.2em;
         font-size: 16px;
@@ -1021,6 +1078,43 @@ footer{
 }
 
 @media (max-width: 500px){
+
+    .header__container{
+        padding: 10px;
+    }
+
+    .header__title{
+        display: none;
+    }
+
+    .header__title--short{
+        display: inline;
+        margin-left: 10px;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--white);  
+    }
+
+    .header__nav{
+        margin-left: 10px;
+    }
+
+    .nav__item {
+        font-size: 12px;
+    }
+
+    .nav__arrow{
+        margin: 0 3px;
+    }
+
+    .nav__arrow svg{
+        height: 12px;
+    }
+
+    .date__container, .date__description {
+        min-width: auto;
+    }
+
     .day__container{
         margin-left: calc(var(--bs-gutter-x) * .5);
     }
@@ -1036,5 +1130,14 @@ footer{
 
     .lesson__item:not(:nth-last-of-type(5)), .lesson__item{
         padding-left: 5px;
-    } 
+    }
+
+    .lesson__list:last-of-type .lesson__item:nth-of-type(n+3) {
+        padding-bottom: 20px;
+    }
+
+    .lesson__list:last-of-type .lesson__item-link{
+        bottom: 20px;
+    }
+
 }

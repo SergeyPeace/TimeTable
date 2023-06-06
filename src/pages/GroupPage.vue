@@ -190,7 +190,7 @@ export default{
 
                         //Проверка адреса Моховой
                         // let addressMokhovaya = ', ул. Моховая, д. 26'
-                        let addressMokhovaya = /(, *ул. *Моховая, д. *26 *)/g
+                        let addressMokhovaya = /(, *ул. *Моховая, д. *26 *)/gi
                         if(addressMokhovaya.test(description)){
                             // description = description.slice(0 , description.length - (addressMokhovaya.length))
                             // room = addressMokhovaya.slice(1)

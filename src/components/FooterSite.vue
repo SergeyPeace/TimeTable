@@ -6,11 +6,11 @@
                 <!-- Санкт-Петербургского государственного университета промышленных технологий и дизайна<br/> -->
                 <span class="footer__description">191180, Санкт-Петербург, Джамбула, 13</span>
             </p>
-            <div class="footer__container-short">
-                <a href="https://hspm.ru/" class="footer__logo-short">
-                    <img src="img/svg/logo-hspm.svg" alt="Логотип HSPM">
+            <div class="footer__container--short">
+                <a href="https://hspm.ru/" class="footer__logo--short">
+                    <img src="/img/svg/logo-hspm.svg" alt="Логотип HSPM">
                 </a>
-                <p class="footer__title-short">ВШПМ</p>
+                <p class="footer__title--short">ВШПМ</p>
             </div>
             <div class="footer__link-container">
                 <a href="https://sutd.ru/" class="footer__link link-sutd" aria-label="СПбГУПТД">
