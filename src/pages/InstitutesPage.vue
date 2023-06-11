@@ -13,7 +13,7 @@
                     <div class="col-12 col-xl-8 container">
                         <ul class="item__list-institute institute row">
                             <li class="institute__item group col-6 col-md-4 " v-for="group in filteredImtGroup" :key="group ">
-                                <router-link :to="'/group/'+ group" class="btn-reset btn-group">{{group}}</router-link>
+                                <router-link :to="'/group/'+ group" class="btn-reset btn-group col-md-6 col-ls-4">{{group}}</router-link>
                             </li>
                         </ul>
                     </div>
