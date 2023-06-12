@@ -63,7 +63,7 @@
 
 
     /* Анимация */
-    --animation-standart: 0.3s ease;
+    --animation-standart: 0.2s ease;
 }
 
 html{
@@ -455,9 +455,38 @@ section{
     color: var(--marengo);
 }
 
+.date__title-container{
+    display: flex;
+    align-items: center;
+}
+
 .date__title{
+    margin-left: 66px;
     font-weight: 700;
     font-size: 36px;
+}
+
+.date__document{
+    margin-left: 30px;
+    outline: none;
+}
+
+.date__document svg path{
+    transition: all var(--animation-standart);
+}
+
+.date__document:focus svg path{
+    stroke: var(--violet);
+}
+
+.date__document:hover svg path{
+    fill: var(--pale-pinkish);
+    stroke: var(--light-blue);
+}
+
+.date__document:active svg path{
+    fill: var(--light-blue);
+    stroke: var(--light-blue);
 }
 
 .date__description{
@@ -1190,7 +1219,13 @@ footer{
     }
     
     .date__title{
+        margin-left: 55px;
         font-size: 20px;
+    }
+
+    .date__document svg{
+        height: 30px;
+        width: 25px;
     }
 
     .date__description{
@@ -1354,6 +1389,8 @@ footer{
 
     .filter__container{
         padding-top: 10px;
+        margin-left: 6px;
+        margin-right: 6px;
     }
 
     .form__btn-sumbit-container{
@@ -1393,5 +1430,5 @@ footer{
 
     .lesson__list:last-of-type .lesson__item-link{
         bottom: 20px;
-    }
+    }   
 }
