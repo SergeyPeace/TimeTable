@@ -10,6 +10,11 @@
             <div class="date__container">
                 <div class="date__title-container">
                     <h2 class="date__title">{{$route.params.group}}</h2>
+                     <a :href=documentDownload class="date__document" target="_blank" rel="noopener noreferrer">
+                        <svg width="36" height="50" viewBox="0 0 48 63" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M46.7741 13.2761L46.7742 13.2762C47.2416 13.7363 47.5 14.3587 47.5 14.9994V15.25H32.5V0.5H32.7625C33.4341 0.5 34.0697 0.758009 34.5366 1.21748C34.5366 1.21754 34.5367 1.21759 34.5367 1.21765L46.7741 13.2761ZM3 0.5H27.5V16.7344C27.5 18.6421 29.0813 20.1875 31 20.1875H47.5V60.0469C47.5 61.3999 46.3938 62.5 45 62.5H3C1.60619 62.5 0.5 61.3999 0.5 60.0469V2.95312C0.5 1.60014 1.60619 0.5 3 0.5ZM34.5 47.75C35.5937 47.75 36.5 46.8691 36.5 45.7734V44.7891C36.5 43.6934 35.5937 42.8125 34.5 42.8125H13.5C12.4063 42.8125 11.5 43.6934 11.5 44.7891V45.7734C11.5 46.8691 12.4063 47.75 13.5 47.75H34.5ZM34.5 39.875C35.5937 39.875 36.5 38.9941 36.5 37.8984V36.9141C36.5 35.8184 35.5937 34.9375 34.5 34.9375H13.5C12.4063 34.9375 11.5 35.8184 11.5 36.9141V37.8984C11.5 38.9941 12.4063 39.875 13.5 39.875H34.5ZM36.5 30.0234V29.0391C36.5 27.9434 35.5937 27.0625 34.5 27.0625H13.5C12.4063 27.0625 11.5 27.9434 11.5 29.0391V30.0234C11.5 31.1191 12.4063 32 13.5 32H34.5C35.5937 32 36.5 31.1191 36.5 30.0234Z" fill="#CAE5FF" stroke="#A3BFEF"/>
+                        </svg>
+                    </a>
                 </div>
                 <div class="date__description">
                     <p class="date__description-time">{{String(weekDates.firstday.toLocaleDateString()) + " — " + String(weekDates.lastday.toLocaleDateString())}}</p>
@@ -26,7 +31,6 @@
         </div>
         
         <div class="timetable-group__container timetable container">
-            <!-- <h2 class="timetable__title">Уровень образования и курс не выбраны</h2> -->
             <div class="timetable__list-container row">
                 <div class="col-2"></div>
                 <div class="container col-10">
@@ -79,6 +83,7 @@ export default{
     data:()=>({
             paginationNext: 1,
             dayName: ['понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'],
+            documentDownload: '', 
         }),
     computed:{
         ...mapState(['imt', 'ipto']),
@@ -122,10 +127,12 @@ export default{
         //Подгружает данные из файла расписания института выбранной группы
         instituteData(){
             let group = this.$route.params.group
-            if(this.iptoGroups.includes(group)){
-                return this.ipto
+            if(this.iptoGroups.includes(group)){ 
+                this.documentDownloadChoice(true)       
+                return this.ipto            
             } 
             else if(this.imtGroups.includes(group)){
+                this.documentDownloadChoice(false) 
                 return this.imt
             }
             return[]
@@ -158,7 +165,7 @@ export default{
                         room = row[this.groupIndex+1]
 
                         // Проверка наличия другого указанного времени
-                        if(Number(description[0])){
+                        if(Number(description[0])&&Number(description[1])){
                             time= row[this.groupIndex].slice(0,11)
                             time = time.replace('-', '<br class="item-time__br"/>&ensp;—&ensp;<br class="item-time__br"/>')
                             description = row[this.groupIndex].slice(12)
@@ -260,7 +267,14 @@ export default{
     methods:{
         paginationStep(direction){
             this.paginationNext += (direction*7)
-        }
+        },
+        documentDownloadChoice(check){
+            if(check){
+                this.documentDownload = '/raspisaniye_ptio.xls'
+            } else{
+                this.documentDownload = '/raspisaniye_mt.xlsx'
+            }   
+        },
     },
     watch:{
         weekNumber(){
