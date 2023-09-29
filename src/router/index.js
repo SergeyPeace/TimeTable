@@ -11,10 +11,13 @@ const routes = [
   // {name: 'main', component: MainPage, path: '/'},
   {name: 'institutes', component: InstitutesPage, path: '/'},
   {name: 'group', component: GroupPage, path: '/group/:group'},
+  // {name: 'group', component: GroupPage, path: '/group/:group(\\d-[А-Я]{3,}-\\d{1,})'},
   {name: 'notFound', component: NotFoundPage, path: '*'},
 ]
 
 const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition

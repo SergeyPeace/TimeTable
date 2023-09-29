@@ -208,15 +208,9 @@ export default{
 
 
                         //Вывод информации об аудитории из общей строки
-                        let regexRoom = /(, *[А-Я]\d{3})|([А-Я]\d{3}|(, ДО))/g
-                        let regexRoomPoint = /(, *[А-Я]\d{3}\.\d{1})/g    //Для таких аудиторий как Д323.1 и Д323.2
+                        let regexRoom = /(, *[А-Я]\d{3}\.\d{1})|(, *[А-Я]\d{3})|([А-Я]\d{3}|(, *ДО))/g
                         if(regexRoom.test(description)){
                             let lineLength = 4
-                            if (regexRoomPoint.test(description)){
-                                regexRoom = regexRoomPoint  
-                            }
-
-                            //Здесь для любых
                             room = ''
                             let arrayRoom = description.match(regexRoom)
                             arrayRoom.forEach(e => {
@@ -229,14 +223,6 @@ export default{
                                     lineLength = 4
                                 }
                                 room = room + e.slice(e.length - lineLength, e.length) + '<br/>'       
-                                
-                                // if(/(.*[Дд]\d*)/.test(e)){
-                                //     address = address.push('https://yandex.ru/maps/2/saint-petersburg/?ll=30.335917%2C59.925163&mode=usermaps&source=constructorLink&um=constructor%3A80c1d043b17b1b6ef1fd6ca0dc1986807c705387ee4a072a81364cdbb8d6f6ed&z=17')
-                                // }
-                                // else if(/(.*[Вв]\d*)/.test(e)){
-                                //     address = address.push('https://yandex.ru/maps/2/saint-petersburg/?ll=30.309389%2C59.921271&mode=usermaps&source=constructorLink&um=constructor%3A80c1d043b17b1b6ef1fd6ca0dc1986807c705387ee4a072a81364cdbb8d6f6ed&z=17')
-                                // }
-          
                             })
                             description = description.replace((regexRoom), '') 
                         }
@@ -251,10 +237,10 @@ export default{
                         else if(room === 'ул. Моховая, д. 26'){
                             address = ['https://yandex.ru/maps/2/saint-petersburg/?ll=30.347802%2C59.942172&mode=usermaps&source=constructorLink&um=constructor%3A80c1d043b17b1b6ef1fd6ca0dc1986807c705387ee4a072a81364cdbb8d6f6ed&z=17']
                         }else {
-                            address =[]
+                            address = []
                         }
 
-                        res[day]??=[]
+                        res[day] ??= []
                         res[day].push({time, description, room, lessonType, address})
                     }
                 }
@@ -266,7 +252,7 @@ export default{
     //Устанавлиает значение шага недель
     methods:{
         paginationStep(direction){
-            this.paginationNext += (direction*7)
+            this.paginationNext += (direction * 7)
         },
         documentDownloadChoice(check){
             if(check){

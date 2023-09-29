@@ -8,7 +8,7 @@
             </p>
             <div class="footer__container--short">
                 <a href="https://hspm.ru/" class="footer__logo--short">
-                    <img src="img/svg/logo-hspm.svg" alt="Логотип HSPM">
+                    <img src="/img/svg/logo-hspm.svg" alt="Логотип HSPM">
                 </a>
                 <p class="footer__title--short">ВШПМ</p>
             </div>
