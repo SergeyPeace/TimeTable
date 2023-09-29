@@ -5,24 +5,24 @@ import {read, utils} from 'xlsx';
 
 Vue.use(Vuex)
 
-const URL = 'https://hspm.ru/studentam/raspisaniye-zanyatiy'
-async function request(URL){
-    const response = await fetch(URL);
-    return await response.text();
-}
+// const URL = 'https://hspm.ru/studentam/raspisaniye-zanyatiy'
+// async function request(URL){
+//     const response = await fetch(URL);
+//     return await response.text();
+// }
 
 
-function cutLink(institute, body) {
-    body = body.slice(body.indexOf(`${institute}</strong>`))
-    let link = body.slice(body.indexOf('<a ')+9, body.indexOf('" target="_blank"'))
-    return `https://hspm.ru${link}`
-}
-//Поиск двух ссылок на расписания занятий
-async function getExcelLinks(){
-    const response = await request(URL)
-    return [cutLink('Институт медиатехнологий', response), cutLink('Институт полиграфических технологий и оборудования', response)]  
-}
-const excelLinks = await getExcelLinks()
+// function cutLink(institute, body) {
+//     body = body.slice(body.indexOf(`${institute}</strong>`))
+//     let link = body.slice(body.indexOf('<a ')+9, body.indexOf('" target="_blank"'))
+//     return `https://hspm.ru${link}`
+// }
+// //Поиск двух ссылок на расписания занятий
+// async function getExcelLinks(){
+//     const response = await request(URL)
+//     return [cutLink('Институт медиатехнологий', response), cutLink('Институт полиграфических технологий и оборудования', response)]  
+// }
+// const excelLinks = await getExcelLinks()
 
 async function download(url){
   const f = await fetch(url);
@@ -55,8 +55,8 @@ export default new Vuex.Store({
   },
   actions: {
     async onLoad({commit}){
-      let imt = await download(excelLinks[0])
-      let ipto = await download(excelLinks[1])
+      let imt = await download('./raspisaniye_mt.xlsx')
+      let ipto = await download('./raspisaniye_ptio.xls')
 
       commit('set', {imt, ipto})
     }
